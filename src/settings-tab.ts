@@ -21,6 +21,18 @@ import { ICONS } from './constants';
   
       containerEl.empty();
 
+      containerEl.empty();
+      new Setting(containerEl)
+        .setName('Custom Folder')
+        .setDesc('A place where planner should save your files.')
+        .addText(component =>
+          component
+            .setValue(this.plugin.settings.customFolder ?? "Day Planners")
+            .onChange((value:string) => {
+              this.plugin.settings.customFolder = value
+              this.plugin.saveData(this.plugin.settings);
+            }));
+
       new Setting(containerEl)
         .setName('Day Planner Mode')
         .setDesc(this.modeDescriptionContent())
